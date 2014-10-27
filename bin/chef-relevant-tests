@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+$:.unshift File.expand_path('../../lib', __FILE__)
+require 'chef-relevant-tests'
+
+begin
+  ChefRelevantTests::Cli.set_revision(ARGV[0])
+  ChefRelevantTests::Cli.set_expander(ARGV[1])
+
+  puts ChefRelevantTests::Cli.run.join(' ')
+rescue => e
+  $stderr.puts(e.message)
+  $stderr.write(e.backtrace.join("\n"))
+  exit 1
+end
