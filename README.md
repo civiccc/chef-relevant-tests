@@ -12,6 +12,8 @@ the average commit. We want to encourage the addition of more integration test
 coverage by reducing the per-commit cost of adding a new suite, so, for every
 commit we want to filter out the unaffected test suites as much as possible.
 
+`gem install chef-relevant-tests`
+
 Usage
 --------
 `chef-relevant-tests [old git ref] [expander]`
