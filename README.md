@@ -8,10 +8,9 @@ tests you run when changing your Chef cookbooks? This is the gem for you!
 
 This is built to scratch an itch we have at Brigade: our single Chef repo has
 (as of writing) 19 test-kitchen suites, but many of them are not relevant to
-the average commit. Also, we want to encourage the addition of more integration
-test coverage by reducing the per-commit cost of adding a new suite. So, for
-every commit we want to filter out the unaffected cookbooks as much as
-possible.
+the average commit. We want to encourage the addition of more integration test
+coverage by reducing the per-commit cost of adding a new suite, so, for every
+commit we want to filter out the unaffected test suites as much as possible.
 
 Usage
 --------
@@ -45,3 +44,15 @@ Architecture
 This gem is meant to be extended by adding new `ChangeDetectors` (which convert
 the diff between two git refs into cookbook names) or `Expanders` (which take
 cookbook names and convert it into test suite names).
+
+How does this compare to [Strainer][1]?
+---------
+Whereas Strainer meant to isolate individual test runs, this gem is meant to
+ease the pain of a large Chef repository by culling the test suite down to just
+the tests likely to have been affected by your change.
+
+It would be possible to make a `Expander` which outputs cookbooks in the format
+for Strainer, but this is not implemented yet. Feel free to create an issue for
+this if you would like it!
+
+[1]: https://github.com/customink/strainer
