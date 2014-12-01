@@ -41,6 +41,30 @@ fi
 kitchen test $tests
 ```
 
+Example
+----------
+```bash
+» git diff HEAD^ -- Berksfile.lock
+   [...]
+-  base_cookbook (1.4.18)
++  base_cookbook (1.4.19)
+   [...]
+
+» cat .kitchen.yml
+[...]
+suites:
+  - name: app-server-suite
+    run_list: ["app_server::default"]    # app_server cookbook depends upon "base_cookbook"
+  - name: mysql-suite
+    run_list: ["mysql::install"]         # mysql cookbook also depends upon "base_cookbook"
+  - name: base-cookbook-suite
+    run_list: ["base_cookbook"]
+  - name: other-suite
+    run_list: ["other_cookbook"]         # does not depend upon base_cookbook
+
+» chef-relevant-tests HEAD^ test-kitchen
+app-server-suite mysql-suite base-cookbook-suite
+```
 Architecture
 ----------
 This gem is meant to be extended by adding new `ChangeDetectors` (which convert
