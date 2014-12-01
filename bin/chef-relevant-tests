@@ -3,8 +3,7 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 require 'chef-relevant-tests'
 
 begin
-  ChefRelevantTests::Cli.set_revision(ARGV[0])
-  ChefRelevantTests::Cli.set_expander(ARGV[1])
+  ChefRelevantTests::Cli.parse_args!(ARGV)
 
   puts ChefRelevantTests::Cli.run.join(' ')
 rescue => e

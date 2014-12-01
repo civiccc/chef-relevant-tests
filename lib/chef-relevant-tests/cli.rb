@@ -1,13 +1,39 @@
 require 'set'
+require 'optparse'
 
 module ChefRelevantTests
   class Cli
     class << self
+      def parse_args!(argv)
+        parser = OptionParser.new do |opts|
+          opts.banner = <<-BANNER.strip
+Usage: chef-relevant-tests [revision] [expander]
+Available Expanders: #{EXPANDER_REGISTRY.keys.join ','}
+BANNER
+        end
+
+        parser.parse!(argv)
+
+        unless set_revision(ARGV.shift)
+          puts "Error: Unknown revision.\n\n#{parser.help}"
+          exit(1)
+        end
+
+        unless set_expander(ARGV.shift)
+          puts "Error: Unknown expander.\n\n#{parser.help}"
+          exit(1)
+        end
+      end
+
       def set_revision(rev)
+        return unless system('git rev-parse #{rev} >/dev/null 2>&1')
+
         @@revision = rev
       end
 
       def set_expander(exp)
+        return if !exp || exp.empty?
+
         @@expander = exp
       end
 

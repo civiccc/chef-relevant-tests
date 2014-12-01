@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.license = 'MIT'
 
   gem.required_ruby_version = '>= 1.9.3'
-  gem.version = '1.0.0'
+  gem.version = '1.0.1'
 
   gem.executables << 'chef-relevant-tests'
   gem.files = Dir['lib/{,**/}*']
