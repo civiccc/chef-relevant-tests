@@ -58,7 +58,8 @@ module ChefRelevantTests
         #
         # @return [Array] Cookbooks that have recipes that will be run
         def expand_run_list(run_list, environment = 'default')
-          Chef::Config.from_file(Chef::Knife.locate_config_file)
+          # Chef 11: Chef::Config.from_file(Chef::Knife.locate_config_file)
+          Chef::Config.from_file(Chef::WorkstationConfigLoader.new(nil, Chef::Log).config_location)
 
           Chef::RunList.new(*run_list)
                        .expand(environment, 'disk')

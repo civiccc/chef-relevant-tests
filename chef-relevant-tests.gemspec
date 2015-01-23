@@ -6,12 +6,12 @@ Gem::Specification.new do |gem|
   gem.license = 'MIT'
 
   gem.required_ruby_version = '>= 1.9.3'
-  gem.version = '1.0.2'
+  gem.version = '2.0.0'
 
   gem.executables << 'chef-relevant-tests'
   gem.files = Dir['lib/{,**/}*']
 
-  gem.add_dependency 'chef'
+  gem.add_dependency 'chef', '~> 12'
   gem.add_development_dependency 'rspec', '~> 3'
 
   gem.description = 'Only run the Chef tests that you need to run'
